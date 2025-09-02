@@ -1,4 +1,4 @@
-const ActressCard = ({ actress }) => {
+const ActressesCard = ({ actress }) => {
   return (
     <div className="col-4 mb-4">
       <div className="card shadow-lg h-100">
@@ -18,7 +18,7 @@ const ActressCard = ({ actress }) => {
         </div>
         <div className="card-footer">
           <small className="text-muted">
-            <strong>Awards:</strong> {actress.awards}
+            <strong>Awards:</strong> {Array.isArray(awards) && awards.length > 0 ? awards.join(', ') : awards}
           </small>
         </div>
       </div>
@@ -26,4 +26,4 @@ const ActressCard = ({ actress }) => {
   );
 }
 
-export default ActressCard
+export default ActressesCard
