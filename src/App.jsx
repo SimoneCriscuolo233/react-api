@@ -9,7 +9,7 @@ function App() {
   const [actresses, setActresses] = useState([])
   const [combined, setCombined] = useState([]);
   const [query, setQuery] = useState("");
-
+  const [filtered, setFiltered] = useState([])
   useEffect(() => {
     axios.get("https://lanciweb.github.io/demo/api/actors/")
       .then((res) => setActors(res.data))
@@ -17,14 +17,16 @@ function App() {
     axios.get("https://lanciweb.github.io/demo/api/actresses/").then((res) => setActresses(res.data))
   }, []);
   useEffect(() => {
-    if (actors.length > 0 || actresses.length > 0) {
-      setCombined([...actors, ...actresses]);
-    }
-  }, [actors, actresses]);
+    setCombined([...actors, ...actresses]);
 
-  const filtered = combined.filter(actor =>
-    actor.name.toLowerCase().includes(query.toLowerCase())
-  );
+  }, [actors, actresses]);
+  useEffect(() => {
+    const tempFiltered = combined.filter(actor =>
+      actor.name.toLowerCase().includes(query.toLowerCase())
+    );
+    setFiltered(tempFiltered)
+
+  }, [query]);
   return (
     <div className="container py-4">
       <h1>Actors & Actresses</h1>
